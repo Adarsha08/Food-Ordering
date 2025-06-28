@@ -1,13 +1,16 @@
-import React from 'react'
-import Home from './pages/Home'
+import React, { useState } from "react";
+import Navbar from "./pages/Navbar";
+import Foodcomp from "./pages/Foodcomp";
 
+function App() {
+  const [cart, setCart] = useState([]);
 
-const App = () => {
   return (
-    <div className="bg-gray-300 h-full" >
-      <Home />
+    <div className="bg-gray-300 h-full">
+      <Navbar cart={cart} />
+      <Foodcomp cart={cart} setCart={setCart} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
