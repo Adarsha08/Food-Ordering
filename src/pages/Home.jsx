@@ -8,7 +8,7 @@ const Home = () => {
   const [cart, setCart] = useState([])
   return (
     <>
-    <div >
+    <div  >
        <Navbar cart={cart} setCart={setCart} />
        <Categorycomp />
       <Foodcomp cart={cart} setCart={setCart} />

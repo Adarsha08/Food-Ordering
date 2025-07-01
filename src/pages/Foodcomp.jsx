@@ -1,5 +1,5 @@
 import React from 'react'
-import Food from './Food'
+import Food from '../Components/Food'
 
 const Foodcomp = ({ cart, setCart }) => {
   const addtocart = (item) => {
