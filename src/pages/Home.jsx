@@ -6,12 +6,13 @@ import { useState } from 'react'
 
 const Home = () => {
   const [cart, setCart] = useState([])
+  const [quantities, setQuantities] = useState({});
   return (
     <>
     <div  >
-       <Navbar cart={cart} setCart={setCart} />
+       <Navbar cart={cart} quantities={quantities} setQuantities={setQuantities} setCart={setCart} />
        <Categorycomp />
-      <Foodcomp cart={cart} setCart={setCart} />
+      <Foodcomp cart={cart} quantities={quantities} setQuantities={setQuantities} setCart={setCart} />
         
     </div>
     </>

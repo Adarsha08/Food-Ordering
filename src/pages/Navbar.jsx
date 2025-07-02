@@ -2,8 +2,20 @@ import React, { useState } from 'react';
 import { GiCrossedBones } from "react-icons/gi";
 import { IoCartOutline } from "react-icons/io5";
 
-const Navbar = ({ cart }) => {
+const Navbar = ({ cart, quantities,setQuantities }) => {
   const [click, setclick] = useState(false);
+  const changequantity = (e) => {
+    const id = e.target.id;
+    const value = e.target.value;
+    setQuantities({ ...quantities, [id]: value });
+
+    // Update the cart's item quantity as well
+    cart.forEach(item => {
+      if (item.id.toString() === id.toString()) {
+        item.quantity = value;
+      }
+    });
+  }
 
   return (
     <>
@@ -18,17 +30,26 @@ const Navbar = ({ cart }) => {
         </div>
       </div>
       {click && (
-        <div className="fixed  top-0 right-0 h-full z-10 bg-gray-300 shadow-lg rounded-lg p-4 w-80 flex flex-col items-center">
+        <div className="fixed  top-0 right-0 h-full z-10 bg-gray-300 shadow-lg rounded-lg p-4 w-96 flex flex-col items-center">
           <h2 className="text-lg mt-8 font-semibold mb-2">Cart Items</h2>
           {cart.length === 0 ? (
             <p>No items in the cart</p>
           ) : (
-            <ul className="w-full">
+            <ul className="w-full flex flex-col  justify-evenly">
               {cart.map((item, idx) => (
                 <li key={idx} className="flex justify-between border-b py-1">
                   <span>{item.food_name}</span>
-                  <span>₹{item.price}</span>
-                </li>
+  <input
+  className="w-10"
+  type="number"
+  id={item.id}
+  name="quantity"
+  min="1"
+  value={quantities[item.id] || item.quantity || 1}
+  onChange={changequantity}
+/><span>Qty: {item.quantity || quantities[item.id] || 1}</span>
+<span>₹{item.price}</span>
+                  </li>
               ))}
             </ul>
           )}
