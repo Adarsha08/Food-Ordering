@@ -10,6 +10,8 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
     const id = e.target.id;
     const value = e.target.value;
     setQuantities({ ...quantities, [id]: value });
+    
+   
 
     // Update the cart's item quantity as well
     cart.forEach(item => {
@@ -27,12 +29,16 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
     console.log("Delete button clicked for item with id:", id);
   };
 
+  const total = cart.reduce((acc, item) =>
+     acc + (item.price * (quantities[item.id] || item.quantity || 1)), 0);
+
   return (
     <>
       <div className="flex justify-between items-center bg-black border-b-white border-b-2 p-4 max-sm:bg-red-300">
         <button className="bg-red-600 ml-10 p-2 max-sm:w-10 max-sm:h-10 max-sm:text-sm max-sm:p-0 rounded-md">
           Login
         </button>
+
         <input
           type="text"
           placeholder="Search..."
@@ -45,36 +51,43 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
           <IoCartOutline className="h-8 w-8 cursor-pointer" />
         </div>
       </div>
+
+
       {click && (
         <div className="fixed top-0 right-0 h-full z-10 bg-gray-300 shadow-lg rounded-lg p-4 w-96 flex flex-col items-center">
           <h2 className="text-lg mt-8 font-semibold mb-2">Cart Items</h2>
           {cart.length === 0 ? (
             <p>No items in the cart</p>
           ) : (
-            <ul className="w-full flex flex-col justify-evenly">
-              {cart.map((item, idx) => (
-                <li key={idx} className="flex justify-between border-b py-1 items-center">
-                  <span>{item.food_name}</span>
-                  <input
-                    className="w-10"
-                    type="number"
-                    id={item.id}
-                    name="quantity"
-                    min="1"
-                    value={quantities[item.id] || item.quantity || 1}
-                    onChange={changequantity}
-                  />
-                  <span>Qty: {item.quantity || quantities[item.id] || 1}</span>
-                  <span>₹{item.price}</span>
-                  <button
-                    onClick={() => deleteid(item.id)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    <MdDelete className="w-7 h-7" />
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="w-full flex flex-col justify-evenly">
+                {cart.map((item, idx) => (
+                  <li key={idx} className="flex justify-between border-b py-1 items-center">
+                    <span>{item.food_name}</span>
+                    <input
+                      className="w-10"
+                      type="number"
+                      id={item.id}
+                      name="quantity"
+                      min="1"
+                      value={quantities[item.id] || item.quantity || 1}
+                      onChange={changequantity}
+                    />
+                    <span>Qty: {quantities[item.id] || item.quantity || 1}</span>
+                    <span>₹{item.price}</span>
+                    <button
+                      onClick={() => deleteid(item.id)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      <MdDelete className="w-7 h-7" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div className="font-bold text-lg mt-4">
+                Total: ₹{total}
+              </div>
+            </>
           )}
           <div
             onClick={() => setclick(!click)}
