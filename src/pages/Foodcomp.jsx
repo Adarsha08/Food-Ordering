@@ -16,6 +16,7 @@ const Foodcomp = ({ cart, setCart,quantities,setQuantities }) => {
     setQuantities({ ...quantities, [id]: value });
     console.log("Quantity added:", value);
   };
+ 
 
   return (
     <div>
@@ -44,7 +45,7 @@ const Foodcomp = ({ cart, setCart,quantities,setQuantities }) => {
             <div className="flex justify-center">
             <button
               className="mt-3  bg-blue-500 text-white px-4 py-2 w-44 rounded hover:bg-blue-600"
-              onClick={() => {addtocart(item); toast.success("Item added")}}
+              onClick={() => {addtocart(item); toast.success("Item added", { autoClose: 100 });}}
             >
               Add to Cart
             </button>

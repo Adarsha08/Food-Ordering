@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
     <div  >
-       <Navbar cart={cart} quantities={quantities} setQuantities={setQuantities} setCart={setCart} />
+      <Navbar cart={cart} setCart={setCart} quantities={quantities} setQuantities={setQuantities} />
        <Categorycomp />
       <Foodcomp cart={cart} quantities={quantities} setQuantities={setQuantities} setCart={setCart} />
         
