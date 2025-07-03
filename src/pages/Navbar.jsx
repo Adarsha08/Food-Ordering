@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GiCrossedBones } from "react-icons/gi";
 import { IoCartOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
+import { toast } from 'react-toastify';
 
 const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
   const [click, setclick] = useState(false);
@@ -31,6 +32,14 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
 
   const total = cart.reduce((acc, item) =>
      acc + (item.price * (quantities[item.id] || item.quantity || 1)), 0);
+
+
+  const order = () => {
+    toast.success(`Order placed! Total: ₹${total}`, { autoClose: 3000 });
+    setCart([]);
+    setclick(false);
+    
+  };
 
   return (
     <>
@@ -87,6 +96,9 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
               <div className="font-bold text-lg mt-4">
                 Total: ₹{total}
               </div>
+              
+                <button onClick={()=>order() } className="absolute bottom-0 mb-10 bg-green-400 w-full flex justify-center items-center text-xl h-10 cursor-pointer">Order:</button>
+      
             </>
           )}
           <div
