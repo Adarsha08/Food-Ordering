@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import Categorycomp from './Categorycomp'
 import Foodcomp from './Foodcomp'
-import { useState } from 'react'
 
 const Home = () => {
   const [cart, setCart] = useState([])
   const [quantities, setQuantities] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   return (
     <>
-    <div  >
       <Navbar cart={cart} setCart={setCart} quantities={quantities} setQuantities={setQuantities} />
-       <Categorycomp />
-      <Foodcomp cart={cart} quantities={quantities} setQuantities={setQuantities} setCart={setCart} />
-        
-    </div>
+      <Categorycomp setSelectedCategory={setSelectedCategory} />
+      <Foodcomp
+        cart={cart}
+        setCart={setCart}
+        quantities={quantities}
+        setQuantities={setQuantities}
+        selectedCategory={selectedCategory}
+      />
     </>
   )
 }

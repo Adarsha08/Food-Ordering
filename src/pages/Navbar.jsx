@@ -4,7 +4,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { toast } from 'react-toastify';
 
-const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
+const Navbar = ({ cart, setCart, quantities, setQuantities, searchTerm, setSearchTerm }) => {
   const [click, setclick] = useState(false);
 
   const changequantity = (e) => {
@@ -51,6 +51,8 @@ const Navbar = ({ cart, setCart, quantities, setQuantities }) => {
         <input
           type="text"
           placeholder="Search..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
           className="border-black p-2 w-96 bg-orange-50 max-sm:w-60"
         />
         <div
